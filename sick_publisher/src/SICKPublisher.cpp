@@ -234,7 +234,7 @@ void VisionaryPublisher::processFrame()
   if (result.isSuccess())
   {
     const auto frame = std::static_pointer_cast<ICameraFrame>(result.getSuccess());
-    auto timeStamp = rclcpp::Time(frame->getTimestamp());
+    auto timeStamp = this->get_clock()->now();
 
     if (!m_firstChunkProcessed)
     {
