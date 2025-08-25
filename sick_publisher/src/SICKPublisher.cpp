@@ -256,7 +256,11 @@ void VisionaryPublisher::processFrame()
       getAnchorToRefTransform();
       transforms.push_back(
         createStaticTransforms(m_cameraFrame, "anchor", m_anchorToRefTranslation, m_anchorToRefRotation, timeStamp));
-      m_staticBroadcaster.sendTransform(transforms);
+
+      if (m_broadcastTransform)
+      {
+        m_staticBroadcaster.sendTransform(transforms);
+      }
 
       m_firstChunkProcessed = true;
     }
@@ -371,6 +375,7 @@ void VisionaryPublisher::setupConfig()
                       m_publishIntensity,
                       m_publishDepth,
                       m_setStreaming,
+                      m_broadcastTransform,
                       m_cameraRotation,
                       m_cameraTranslation,
                       m_gevComponents,
@@ -386,6 +391,7 @@ void VisionaryPublisher::setupConfig()
                       m_publishIntensity,
                       m_publishDepth,
                       m_setStreaming,
+                      m_broadcastTransform,
                       m_cameraRotation,
                       m_cameraTranslation,
                       m_gevComponents,
