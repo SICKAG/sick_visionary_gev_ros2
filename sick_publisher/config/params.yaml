@@ -12,6 +12,7 @@ visionary_b_two:
     gev_config:
       ComponentList: ["Range", "Intensity", "ImuBasic"]
     gev_params:
+      PtpEnable: false # If true sets the device as PTP slave
       MultiSlopeMode: "Off" # HDR control: Off / PresetAggressive
       ExposureTimeSelector: "Range"
       ExposureAuto: "Off" # Off / Continuous
@@ -68,6 +69,8 @@ visionary_t_mini:
     broadcast_tf: true
     gev_config:
       ComponentList: ["Intensity"]
+    gev_params:
+      PtpEnable: false # If true sets the device as PTP slave
   cam_22420125:
     camera_rotation: [0.0, 0.0, 0.0]
     camera_translation: [0.0, 0.0, 0.0]

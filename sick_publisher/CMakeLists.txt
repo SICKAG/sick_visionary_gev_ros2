@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Unlicense
 
 cmake_minimum_required(VERSION 3.22)
-project(sick_visionary_gev_ros2 VERSION 1.0.0 LANGUAGES CXX)
+project(sick_visionary_gev_ros2 VERSION 1.1.0 LANGUAGES CXX)
 
 # Prevent warnings in CMake>=3.24 for ExternalProject_Add()
 # see https://cmake.org/cmake/help/latest/policy/CMP0135.html

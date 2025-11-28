@@ -22,6 +22,7 @@ TEST(ParamsFileUtilsTest, SetParamsFromYaml)
   yamlNode["publish_intensity"] = true;
   yamlNode["publish_depth"] = false;
   yamlNode["set_streaming"] = true;
+  yamlNode["broadcast_tf"] = false;
   yamlNode["camera_rotation"] = std::vector<double>{0.0, 1.0, 2.0};
   yamlNode["camera_translation"] = std::vector<double>{3.0, 4.0, 5.0};
   yamlNode["gev_config"]["ComponentList"] = std::vector<std::string>{"Component1", "Component2"};
@@ -31,6 +32,7 @@ TEST(ParamsFileUtilsTest, SetParamsFromYaml)
   bool publishIntensity = false;
   bool publishDepth = true;
   bool setStreaming = false;
+  bool broadcastTF = true;
   std::vector<double> cameraRotation;
   std::vector<double> cameraTranslation;
   std::vector<std::string> gevComponents;
@@ -40,6 +42,7 @@ TEST(ParamsFileUtilsTest, SetParamsFromYaml)
                     publishIntensity,
                     publishDepth,
                     setStreaming,
+                    broadcastTF,
                     cameraRotation,
                     cameraTranslation,
                     gevComponents,
@@ -48,6 +51,7 @@ TEST(ParamsFileUtilsTest, SetParamsFromYaml)
   EXPECT_TRUE(publishIntensity);
   EXPECT_FALSE(publishDepth);
   EXPECT_TRUE(setStreaming);
+  EXPECT_FALSE(broadcastTF);
 
   EXPECT_EQ(cameraRotation.size(), 3);
   EXPECT_EQ(cameraRotation[0], 0.0);

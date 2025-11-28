@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.1.0 (2025-10-10)
+
+### Changed
+
+### Added
+- Added toggle parameter for tf_broadcast
+- PtpEnable parameter to documentation
+- Extended FAQ Section in README
+
+### Supported devices
+- Visionary-B Two, with `Visionary_GigE_Vision_Basic` app
+- Visionary-S AP, with `Visionary_GigE_Vision_Basic` app
+- Visionary-T Mini AP, with `Visionary_GigE_Vision_Basic` app
+
+### Known Issues
+- Windows build not fully supported
+
 ## 1.0.0 - initial public release (2025-04-01)
 
 ### Changed
