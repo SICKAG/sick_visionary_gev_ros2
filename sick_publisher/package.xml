@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>sick_visionary_gev_ros2</name>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <description>This repository contains a ROS2 driver for Visionary-T Mini AP (V3S145-1AAAAAA), Visionary-S AP (V3S142-1AAxxxx) and Visionary-B Two (V3S146-1AXXXXX). It is written in C++ and designed to work with ROS2 Humble/Iron/Jazzy.</description>
   <maintainer email="techsupport3dsnapshot@sick.de">SICK AG TechSupport 3D Snapshot</maintainer>
   <author email="techsupport3dsnapshot@sick.de">SICK AG TechSupport 3D Snapshot</author>

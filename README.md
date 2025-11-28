@@ -39,6 +39,7 @@ The source code is released under [The Unlicense](./LICENSE)
   - [B. Composition using Launch Files](#b-composition-using-launch-files)
 - [Understanding the transforms (frames/coordinate systems)](#understanding-the-transforms-framescoordinate-systems)
 - [FAQ](#faq)
+  - [1. Time synchronization (Setting the device system time)](#1-time-synchronization-setting-the-device-system-time)
 
 ## Supported Environments
 
@@ -54,8 +55,8 @@ The ROS2 wrapper in this repository have been tested with the following platform
 
 | **Device Name**                      | **Part No.**     | **Description**                      | **Firmware Version** | **GigE App**|
 | -------------------------------------| -----------------| ------------------------------------ | -------------------- |-------------|
-| Visionary-T Mini AP (V3S145-1AAAAAA) | 1132065          | 3D time-of-flight camera             | 3.15.0                 |2.0.1        |
-| Visionary-B Two (V3S146-1AAAAAA)     | 1133032          | 3D stereovision camera with RGB data | 3.15.2                 |   2.0.1          |
+| Visionary-T Mini AP (V3S145-1AAAAAA) | 1132065          | 3D time-of-flight camera             | 3.15.3                 |2.0.1        |
+| Visionary-B Two (V3S146-1AAAAAA)     | 1133032          | 3D stereovision camera with RGB data | 3.18.0                 |   2.0.1          |
 | Visionary-S AP (V3S142-1AAxxxx)      | 1114320, 1114319 | 3D structured light stereovision camera with RGB data | 3.15.0 |    2.0.1         |
 
 ## Getting started
@@ -372,6 +373,7 @@ It specifies the following system settings:
 -  cam_22222 and cam_77777 stream Range and Intensity data. cam_55555 additionally streams ImuBasic data
 -  All devices disabled ExposureAuto for the Range component
 -  cam_22222 enabled the ValidationFilter with Level -3
+-  All devices act as PTP slaves syncing their system time to the best PTP master in the network
 
 ```yaml
 serial_numbers:
@@ -387,6 +389,7 @@ visionary_b_two:
     gev_config:
       ComponentList: ["Range", "Intensity"]
     gev_params:
+      PtpEnable: true # sets the device as PTP slave
       ExposureTimeSelector: "Range"
       ExposureAuto: "Off" # Off / Continuous
   cam_22222:
@@ -472,3 +475,25 @@ There are three primary coordinate systems:
 3. **Anchor** Coordinate System: This system has its origin at the camera's focal point, with the z-axis aligned along the optical axis of the camera.
 
 ## FAQ
+
+### 1. Time synchronization (Setting the device system time)
+**Q**: How can I set my device time to the current time?  
+My device shows as a default the frame time (= 2020-01-06 01:20:43.104078 UTC):
+```
+header:
+  stamp:
+    sec: 1578273643
+    nanosec: 1578273643.104078000
+```
+**A:** You can achieve an accurate device system time (=frame time) by syncing your device via the Precision Time Protocol (PTP) to a master clock on your network. This can be achieved with the following steps:
+
+1.  Make sure your camera is connected to a host PC which runs a **PTP service as master**.
+For example to run the standard linux **ptpd** service: 
+`sudo ptpd -M -i YOUR_INTERFACE -V`
+
+2.  Enable **PTP Slave** mode on your device from the config file by adding a parameter like this: 
+```
+gev_params:
+  PtpEnable: true
+```
+3. Launch the ros2 Nodes. The device time will sync almost instantly to the master clock.
