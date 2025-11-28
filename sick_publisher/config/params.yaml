@@ -8,6 +8,7 @@ visionary_b_two:
     set_streaming: true
     publish_intensity: true
     publish_depth: true
+    broadcast_tf: true
     gev_config:
       ComponentList: ["Range", "Intensity", "ImuBasic"]
     gev_params:
@@ -42,6 +43,7 @@ visionary_s:
     set_streaming: true
     publish_intensity: true
     publish_depth: true
+    broadcast_tf: true
     gev_config:
       ComponentList: ["Intensity", "Range"]
   cam_20130008:
@@ -63,6 +65,7 @@ visionary_t_mini:
     set_streaming: true
     publish_intensity: true
     publish_depth: true
+    broadcast_tf: true
     gev_config:
       ComponentList: ["Intensity"]
   cam_22420125:

@@ -14,7 +14,8 @@ namespace sick
 void setPublishingAndStreamingParams(const YAML::Node& yamlNode,
                                      bool& publishIntensity,
                                      bool& publishDepth,
-                                     bool& setStreaming)
+                                     bool& setStreaming,
+                                     bool& broadcastTF)
 {
   if (yamlNode["publish_intensity"])
   {
@@ -29,6 +30,11 @@ void setPublishingAndStreamingParams(const YAML::Node& yamlNode,
   if (yamlNode["set_streaming"])
   {
     setStreaming = yamlNode["set_streaming"].as<bool>();
+  }
+
+  if (yamlNode["broadcast_tf"])
+  {
+    broadcastTF = yamlNode["broadcast_tf"].as<bool>();
   }
 }
 
@@ -89,12 +95,13 @@ void setParamsFromYaml(const YAML::Node& yamlNode,
                        bool& publishIntensity,
                        bool& publishDepth,
                        bool& setStreaming,
+                       bool& broadcastTF,
                        std::vector<double>& cameraRotation,
                        std::vector<double>& cameraTranslation,
                        std::vector<std::string>& gevComponents,
                        std::vector<std::pair<std::string, std::string>>& gevParams)
 {
-  setPublishingAndStreamingParams(yamlNode, publishIntensity, publishDepth, setStreaming);
+  setPublishingAndStreamingParams(yamlNode, publishIntensity, publishDepth, setStreaming, broadcastTF);
   setMountingParams(yamlNode, cameraRotation, cameraTranslation);
   setGevComponents(yamlNode, gevComponents);
   setGevParams(yamlNode, gevParams);

@@ -186,6 +186,8 @@ private:
   bool m_publishDepth{true};
   /// Toggle for depth topic
   bool m_setStreaming{true};
+  /// Toggle for broadcasting tf
+  bool m_broadcastTransform{false};
 
   // Camera specific parameters
   int m_serialNumber;
